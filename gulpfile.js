@@ -49,7 +49,7 @@ gulp.task('bundle', [ 'compile' ], function() {
       .pipe(babel({
         presets: [ 'es2015' ],
       }))
-      .pipe(uglify().on('error', gutil.log));
+      .pipe(uglify());
   }
   return stream
     .on('error', gutil.log)
