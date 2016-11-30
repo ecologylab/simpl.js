@@ -14,7 +14,7 @@ var del = require('del');
 
 var env = argv.env || 'prod';
 var isDev = env === 'dev';
-console.log("Environment: " + env);
+console.log("Environment (specify with --env when calling gulp): " + env);
 
 var tsProject = typescript.createProject('tsconfig.json');
 
