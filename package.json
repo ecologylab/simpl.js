@@ -1,8 +1,8 @@
 {
   "name": "simpl.js",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "JavaScript library for S.IM.PL. (Support for Information Mapping between Programming Languages). Provides de/serialization for complex object graphs with cyclic references.",
-  "main": "build/simpl.js",
+  "main": "build/simpl.min.js",
   "types": "build/simpl.d.ts",
   "scripts": {
     "prepublish": "gulp",
