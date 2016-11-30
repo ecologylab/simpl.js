@@ -56,9 +56,8 @@ gulp.task('bundle', [ 'compile' ], function() {
     .pipe(gulp.dest('build'));
 });
 
-
-gulp.task('default', [ 'bundle' ]);
-
 gulp.task('clean', function() {
   del.sync(['build']);
 })
+
+gulp.task('default', [ 'bundle' ]);
