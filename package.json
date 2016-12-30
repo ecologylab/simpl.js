@@ -1,6 +1,6 @@
 {
   "name": "simpl.js",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "JavaScript library for S.IM.PL. (Support for Information Mapping between Programming Languages). Provides de/serialization for complex object graphs with cyclic references.",
   "main": "build/simpl.bundle.js",
   "types": "build/simpl.d.ts",
