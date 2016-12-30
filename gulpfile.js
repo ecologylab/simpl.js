@@ -1,25 +1,24 @@
 // Build simpl.js.
 
-var argv = require('yargs').argv;
-var gulp = require('gulp');
-var typescript = require('gulp-typescript');
-var sourcemaps = require('gulp-sourcemaps');
-var browserify = require('browserify');
-var babel = require('gulp-babel');
-var uglify = require('gulp-uglify');
-var source = require('vinyl-source-stream');
-var buffer = require('vinyl-buffer');
-var gutil = require('gulp-util');
-var del = require('del');
+const argv = require('yargs').argv;
+const gulp = require('gulp');
+const typescript = require('gulp-typescript');
+const sourcemaps = require('gulp-sourcemaps');
+const browserify = require('browserify');
+const uglify = require('gulp-uglify');
+const source = require('vinyl-source-stream');
+const buffer = require('vinyl-buffer');
+const gutil = require('gulp-util');
+const del = require('del');
 
-var env = argv.env || 'prod';
-var isDev = env === 'dev';
+let env = argv.env || 'prod';
+let isDev = env === 'dev';
 console.log("Environment (specify with --env when calling gulp): " + env);
 
-var tsProject = typescript.createProject('tsconfig.json');
+let tsProject = typescript.createProject('tsconfig.json');
 
 gulp.task('compile', function() {
-  var stream = tsProject.src();
+  let stream = tsProject.src();
   if (isDev) {
     stream = stream.pipe(sourcemaps.init());
   }
@@ -31,25 +30,20 @@ gulp.task('compile', function() {
 });
 
 gulp.task('bundle', [ 'compile' ], function() {
-  var mainFile = 'build/simpl.js';
-  var bundle = browserify({
+  let mainFile = 'build/simpl.js';
+  let bundleFileName = 'simpl.bundle.js';
+
+  let stream = browserify({
     entries: mainFile,
     standalone: 'simpl',
     debug: isDev,
-  });
-
-  var bundleFileName = isDev ? 'simpl.bundle.js' : 'simpl.min.js';
-
-  var stream = bundle
-    .bundle()
-    .pipe(source(bundleFileName))
-    .pipe(buffer());
+  }).transform('babelify', {
+    presets: [ 'es2015' ],
+  }).bundle().pipe(source(bundleFileName)).pipe(buffer());
   if (!isDev) {
-    stream = stream
-      .pipe(babel({
-        presets: [ 'es2015' ],
-      }))
-      .pipe(uglify());
+    stream = stream.pipe(sourcemaps.init({
+      loadMaps: true,
+    })).pipe(uglify());
   }
   return stream
     .on('error', gutil.log)
