@@ -1,8 +1,8 @@
 {
   "name": "simpl.js",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "JavaScript library for S.IM.PL. (Support for Information Mapping between Programming Languages). Provides de/serialization for complex object graphs with cyclic references.",
-  "main": "build/simpl.bundle.js",
+  "main": "build/simpl.js",
   "types": "build/simpl.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
